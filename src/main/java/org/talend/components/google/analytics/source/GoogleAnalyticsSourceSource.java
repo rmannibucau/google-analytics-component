@@ -21,7 +21,6 @@ import java.util.Map;
 import javax.json.stream.JsonGeneratorFactory;
 import javax.json.stream.JsonParserFactory;
 
-import org.talend.components.google.analytics.json.JsonpJsonFactory;
 import org.talend.sdk.component.api.configuration.Option;
 import org.talend.sdk.component.api.input.Producer;
 import org.talend.sdk.component.api.meta.Documentation;
@@ -29,9 +28,11 @@ import org.talend.sdk.component.api.record.Record;
 import org.talend.sdk.component.api.record.Schema;
 import org.talend.sdk.component.api.service.record.RecordBuilderFactory;
 
+import com.github.rmannibucau.google.json.JsonpJsonFactory;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
 import com.google.api.services.analyticsreporting.v4.AnalyticsReporting;
 import com.google.api.services.analyticsreporting.v4.AnalyticsReportingScopes;
 import com.google.api.services.analyticsreporting.v4.model.ColumnHeader;
@@ -79,7 +80,7 @@ public class GoogleAnalyticsSourceSource implements Serializable {
     }
 
     private Iterator<Record> loadReports() throws Exception {
-        final JsonpJsonFactory jsonFactory = new JsonpJsonFactory(parserFactory, generatorFactory);
+        final JsonFactory jsonFactory = JsonpJsonFactory.of(parserFactory, generatorFactory);
         final HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         final GoogleCredential credential = GoogleCredential.fromStream(
                 new ByteArrayInputStream(

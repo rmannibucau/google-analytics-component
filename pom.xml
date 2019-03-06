@@ -42,6 +42,12 @@
     </dependency>
 
     <dependency>
+      <groupId>com.github.rmannibucau</groupId>
+      <artifactId>google-jsonp</artifactId>
+      <version>1.0</version>
+    </dependency>
+
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
       <version>5.4.0</version>
